@@ -1,0 +1,4 @@
+interface:
+  display_name: "课程讲义与考核事项"
+  short_description: "按课程维护带时间戳的讲义、作业考试事项及复习目录中的章节索引"
+  default_prompt: "使用 $nuaa-course-note 整理我指定课程和课次的讲义，标注时间与重点，保留考试、作业及成绩事项的原话，更新作业.md、考试.md和复习目录的章节索引.md。"

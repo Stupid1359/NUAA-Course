@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nuaa-course"
+version = "0.1.0"
+description = "Extract subtitles from NUAA Feitian Cloud Classroom courses"
+requires-python = ">=3.10"
+dependencies = ["playwright>=1.43.0", "flask>=3.0"]
+
+[project.optional-dependencies]
+desktop = ["pywebview>=6.2.1", "pyinstaller>=6.22.3"]
+test = ["psutil>=7.0"]
+
+[project.scripts]
+nuaa-course = "nuaa_course.cli:main"
+nuaa-course-desktop = "nuaa_course.desktop:main"
+
+[tool.setuptools.packages.find]
+include = ["nuaa_course*"]
+
+[tool.setuptools.package-data]
+nuaa_course = ["templates/*.html", "static/*.css", "static/*.js"]

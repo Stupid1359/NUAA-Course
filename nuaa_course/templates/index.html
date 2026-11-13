@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="local-token" content="{{ token }}">
+  <title>课程字幕 · NUAA</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/static/app.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="/"><span class="brand-icon">字</span><span>课程字幕<small>NUAA COURSE LIBRARY</small></span></a>
+    <div class="sidebar-heading"><span>我的课程</span><div><button id="add-course" class="icon-button" title="添加课程" aria-label="添加课程">＋</button><button id="hide-sidebar" class="icon-button" title="隐藏课程列表" aria-label="隐藏课程列表">‹</button></div></div>
+    <label class="search"><span>⌕</span><input id="search" placeholder="搜索课程" aria-label="搜索课程"></label>
+    <p class="sidebar-hint">拖动课程调整顺序</p>
+    <nav id="courses" aria-label="课程列表"></nav>
+    <div class="sidebar-footer"><span class="status-dot"></span>本地课程资料库<small>字幕保存在 data/courses 目录</small></div>
+  </aside>
+  <div id="sidebar-resizer" role="separator" tabindex="0" aria-label="调整课程列表宽度" aria-orientation="vertical" aria-valuemin="240" aria-valuemax="480" aria-valuenow="300" title="拖动调整宽度，也可使用方向键"></div>
+  <main>
+    <header class="topbar"><div class="topbar-start"><button id="toggle-sidebar" class="secondary" aria-controls="sidebar" aria-expanded="true">隐藏课程</button><span>课程资料 / <strong>字幕管理</strong></span></div><button id="reload" class="text-button">刷新数据 ↻</button></header>
+    <div id="message" role="alert" hidden></div>
+    <section id="empty" class="empty" hidden><h1>建立你的课程字幕库</h1><p>添加课程网址，读取课程清单，再选择需要的课次。</p><button id="empty-add" class="primary">添加课程</button></section>
+    <section id="workspace" hidden>
+      <div class="course-heading"><div><p class="eyebrow">COURSE SUBTITLES</p><h1 id="course-name"></h1><p id="course-meta" class="muted"></p></div><button id="edit-course" class="secondary">更新课程网址</button></div>
+      <div class="stats" id="stats"></div>
+      <div class="section-heading"><div><h2>课次与字幕</h2><p class="muted">选择需要的课次，批量获取原始字幕。</p></div><button id="sync" class="secondary">更新课次清单</button></div>
+      <div class="controls"><div class="selection-tools"><button id="select-all" class="text-button">全选</button><button id="select-pending" class="text-button">选择未完成</button><button id="clear-selection" class="text-button">取消选择</button><span id="selected-count">已选 0 节</span></div><select id="filter" aria-label="筛选字幕状态"><option value="all">全部课次</option><option value="complete">已有字幕</option><option value="empty">接口暂无字幕</option><option value="pending">待抓取</option></select></div>
+      <div class="table-wrap"><table><thead><tr><th><input type="checkbox" id="toggle-all" aria-label="选择显示的所有课次"></th><th>上课日期</th><th>课次</th><th>字幕状态</th><th>字幕条数</th><th>操作</th></tr></thead><tbody id="lessons"></tbody></table><p id="no-lessons" class="empty-table" hidden>还没有课次清单，点击“更新课次清单”读取。</p></div>
+      <div class="action-bar"><div class="options"><label><input id="skip-existing" type="checkbox" checked>跳过已有字幕</label><label>登录等待 <input id="wait" type="number" min="0" max="600" value="120"> 秒</label></div><button id="extract" class="primary">抓取所选课次 <span>→</span></button></div>
+      <p class="hint">任务开始后会打开 Edge。请在等待时间内完成登录并进入课程页面。</p>
+      <p id="output-path" class="path"></p>
+    </section>
+    <section class="job-panel"><div class="job-heading"><div><h2>执行记录 <span id="job-state" class="badge neutral" role="status">待启动</span></h2></div><div class="job-heading-actions"><span id="job-time" class="muted"></span><button id="cancel-job" class="danger" hidden>终止操作</button></div></div><p id="job-caption" class="muted">选择课程和课次后，即可开始抓取。</p><div class="log-actions"><button id="copy-logs" class="secondary">复制记录</button><button id="download-logs" class="secondary">下载 TXT</button><span id="copy-status" class="muted" role="status"></span></div><textarea id="logs" readonly aria-label="可复制的执行记录" spellcheck="false">暂无执行记录</textarea></section>
+  </main>
+  <dialog id="course-dialog"><form id="course-form"><div class="dialog-heading"><h2 id="dialog-title">添加课程</h2><button type="button" id="close-dialog" class="icon-button" aria-label="关闭">×</button></div><label>课程名称<input id="input-name" required maxlength="100" placeholder="例如：课程名称"></label><label>课程完整网址<textarea id="input-url" rows="4" required placeholder="粘贴浏览器地址栏中的完整课程网址"></textarea></label><p class="muted">支持飞天云课堂播放页面，包括带长令牌的网址。</p><p id="form-error" role="alert"></p><button type="submit" class="primary">保存课程</button></form></dialog>
+  <dialog id="transcript-dialog"><div class="dialog-heading"><h2>字幕预览</h2><button id="close-transcript" class="icon-button" aria-label="关闭字幕">×</button></div><pre id="transcript"></pre></dialog>
+</body>
+</html>

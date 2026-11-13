@@ -1,0 +1,7 @@
+{
+  "browser_channel": "msedge",
+  "manual_wait_seconds": 120,
+  "extra_wait_ms": 8000,
+  "timeout_ms": 60000,
+  "output_root": "courses"
+}

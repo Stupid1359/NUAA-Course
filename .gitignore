@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.pyc
+
+# Browser profiles (cookies, login state, history)
+.browser-profile/
+.edge-profile/
+
+# Playwright auth state
+storage_state.json
+
+# Course work data (personal learning materials)
+.cache/
+
+# 仅收录 course_materials 中经过检查的两门课程资料
+/course_materials/*
+!/course_materials/计算机网络/
+!/course_materials/编译原理Ⅰ/
+
+# Obsidian vault
+vault/
+
+# Course registry (personal)
+courses.json
+courses.local.json
+settings.local.json
+.venv/
+*.egg-info/
+
+# 本机运行资料和桌面程序
+/app/
+/data/
+/courses/
+/work/
+/build/
+/dist/
+ui-run.json
+captured_responses.json
+
+# Local course-specific checks and extraction notes
+/tests/
+/docs/extraction-record.md
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+Desktop.ini
